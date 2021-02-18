@@ -12,10 +12,10 @@ DISCONNECT_MESSAGE = "!DISCONNECT"
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 server.bind(ADDR)
-        
-def handle_client(conn, addr):
+
+def handle_client(conn, addr, my_clients):
     #print(f"[NEW CONNECTION] {addr} connected.")
-    
+    my_clients.append(conn)
     connected = True
     while connected:
         msg_length = conn.recv(HEADER).decode(FORMAT)
@@ -24,17 +24,22 @@ def handle_client(conn, addr):
             msg = conn.recv(msg_length).decode(FORMAT)
             if msg == DISCONNECT_MESSAGE:
                 connected = False
-            
-            #print(conn, addr, "\n")
+                my_clients.remove(conn)
+                print(conn, addr, "\n")
             print(msg.replace("\n", ""))
-            conn.send(msg.encode(FORMAT))
+            send_all(msg.encode(FORMAT), my_clients)
             
+def send_all(message, my_clients):
+    for client in my_clients:
+        client.send(message)
 def start():
+    my_clients = []
     server.listen()
     print(f"[LISTENING] Chatroom is online.")
     while True:
         conn, addr = server.accept()
-        thread = threading.Thread(target=handle_client, args=(conn, addr))
+        my_clients.append(conn)
+        thread = threading.Thread(target=handle_client, args=(conn, addr, my_clients))
         thread.start()
         #print(f"[ACTIVE CONNECTIONS] {threading.activeCount() - 1}")
 

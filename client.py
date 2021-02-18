@@ -1,17 +1,17 @@
 import socket
 import threading
-from ip_info import SERVER
+#from ip_info import SERVER
 
 HEADER = 64
 PORT = 5050
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = '!DISCONNECT'
+SERVER = input("Enter server URL/IP ADDRESS: ")
 ADDR = (SERVER, PORT)
-
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print("Connecting to server...")
 client.connect(ADDR)
-print("Connection successful.")
+print("Connection successful. Welcome to the chatroom!")
 
 def send(msg):
 	msg = "\n" + msg
@@ -48,5 +48,8 @@ def main():
 			msg = input("")
 		if msg != DISCONNECT_MESSAGE:
 			send(username+ ': ' + msg)
-
+		else:
+			send(username + " disconnected.")
+			quit()		
+	
 main()
