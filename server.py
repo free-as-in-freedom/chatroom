@@ -25,8 +25,8 @@ def handle_client(conn, addr):
             if msg == DISCONNECT_MESSAGE:
                 connected = False
             
-            print(conn, addr, "\n")
-            #print(msg, end="")
+            #print(conn, addr, "\n")
+            print(msg.replace("\n", "")
             conn.send(msg.encode(FORMAT))
             
 def start():
