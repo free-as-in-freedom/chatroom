@@ -26,7 +26,7 @@ def handle_client(conn, addr):
                 connected = False
             
             #print(conn, addr, "\n")
-            print(msg.replace("\n", "")
+            print(msg.replace("\n", ""))
             conn.send(msg.encode(FORMAT))
             
 def start():
