@@ -1,12 +1,10 @@
 import socket
 import threading
-import ip_info
+from ip_info import SERVER
 
 HEADER = 64
 PORT = 5050
 #get your local ipv4 address
-#SERVER = socket.gethostbyname(socket.gethostname())
-SERVER = "INSERT IP HERE"
 ADDR = (SERVER, PORT)
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
