@@ -22,19 +22,21 @@ def send(msg):
 	client.send(send_length)
 	client.send(message)
 
-def read_messages():
+def read_messages(username):
 	prev_message = None
 	while True:
 		message = client.recv(2048).decode(FORMAT).replace("\n", "")
-		#message = client.recv(2048).decode(FORMAT)
 		if message != prev_message:
-			print(message, end = "\n>")
+			if message.split(":")[0] == username:
+				print(message, end = "\n>")
+			else:
+				print(f"\n{message}", end = "\n>")
 		prev_message = message		
 
 def main():
 	username = input("Input your username here: ")
 	msg = None	
-	thread = threading.Thread(target = read_messages) 
+	thread = threading.Thread(target = read_messages, args = (username, ))
 	thread.start()
 	
 	first = True
