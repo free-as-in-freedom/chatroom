@@ -1,10 +1,11 @@
 import socket
+import ip_info
 
 HEADER = 64
 PORT = 5050
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = '!DISCONNECT'
-SERVER = 'INSERT IP HERE'
+SERVER = '45.77.215.116'
 ADDR = (SERVER, PORT)
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
