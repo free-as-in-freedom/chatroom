@@ -1,6 +1,5 @@
 import socket
 import threading
-import keyboard
 
 HEADER = 64
 PORT = 5050
