@@ -9,7 +9,7 @@ To run the server, run `python3 server.py` on the server side, and run `python3 
 
 # Network Communication
 
-This program is a client/server that uses TCP and runs on any port that the server specifies. I decided to use port 5050, and I think that will work well ni most use cases. The messages are encoded and decoded using UTF-8.
+This program is a client/server that uses TCP and runs on any port that the server specifies. I decided to use port 5050, and I think that will work well in most use cases. The messages are encoded and decoded using UTF-8.
 
 # Development Environment
 
