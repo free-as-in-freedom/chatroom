@@ -13,7 +13,7 @@ This program is a client/server that uses TCP and runs on any port that the serv
 
 # Development Environment
 
-This software was creatied using Python 3 and Vim with the socket and threading libraries. These libraries come preinstalled with Python 3.
+This software was creatied using Python 3 and Vim with the [socket](https://docs.python.org/3/library/socket.html) and [threading](https://docs.python.org/3/library/threading.html) libraries. These libraries come preinstalled with Python 3.
 
 I am running a Debian server VPS through [Vultr](https://www.vultr.com/?ref=8802157). 
 
