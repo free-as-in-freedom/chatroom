@@ -1,7 +1,5 @@
 import socket
 import threading
-import os
-#from ip_info import SERVER
 
 HEADER = 64
 PORT = 5050
@@ -10,9 +8,9 @@ DISCONNECT_MESSAGE = '!DISCONNECT'
 SERVER = input("Enter server URL/IP ADDRESS: ")
 ADDR = (SERVER, PORT)
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-print("Connecting to server...")
+print(f"Connecting to {SERVER}...")
 client.connect(ADDR)
-print("Connection successful. Welcome to the chatroom!")
+print(f"Connection to {SERVER} successful.")
 
 def send(msg):
 	msg = "\n" + msg
@@ -43,6 +41,7 @@ def read_messages(username):
 
 def main():
 	username = input("Input your username here: ")
+	print(f"Welcome to the chatroom, {username}!")	
 	msg = None	
 	thread = threading.Thread(target = read_messages, args = (username, ))
 	thread.start()
