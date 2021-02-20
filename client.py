@@ -1,5 +1,6 @@
 import socket
 import threading
+import os
 #from ip_info import SERVER
 
 HEADER = 64
@@ -26,8 +27,15 @@ def read_messages(username):
 	prev_message = None
 	while True:
 		message = client.recv(2048).decode(FORMAT).replace("\n", "")
+		other_user = message.split(":")[0]
 		if message != prev_message:
-			if message.split(":")[0] == username:
+			if ": !DISCONNECT" in message:
+				if other_user == username:
+					print(f"You has disconnected.")
+					return	
+				else:
+					print(f"\n{other_user} has disconnected.", end = "\n>")
+			elif message.split(":")[0] == username:
 				print(message, end = "\n>")
 			else:
 				print(f"\n{message}", end = "\n>")
@@ -40,16 +48,13 @@ def main():
 	thread.start()
 	
 	first = True
-	while msg != DISCONNECT_MESSAGE:
+	#while msg != DISCONNECT_MESSAGE:
+	while True:
 		if first == True:
 			msg = input(">")
 			first = False
 		else:
 			msg = input("")
-		if msg != DISCONNECT_MESSAGE:
-			send(username+ ': ' + msg)
-		else:
-			send(username + " disconnected.")
-			quit()		
-	
+		send(username+ ': ' + msg)
 main()
+
