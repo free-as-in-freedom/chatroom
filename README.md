@@ -20,7 +20,6 @@ I am running a Debian server VPS through [Vultr](https://www.vultr.com/?ref=8802
 
 # Useful Websites
 
-{Make a list of websites that you found helpful in this project}
 * [socket Official Documentation](https://docs.python.org/3/library/socket.html)
 * [Python Socket Programming Tutorial - Tech With Tim](https://www.youtube.com/watch?v=3QiPPX-KeSc)
 
