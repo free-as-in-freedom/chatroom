@@ -1,16 +1,14 @@
 import socket
 import threading
 
+#global variables
 HEADER = 64
 PORT = 5050
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = '!DISCONNECT'
+#get user input for IP address or URL
 SERVER = input("Enter server URL/IP ADDRESS: ")
 ADDR = (SERVER, PORT)
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-print(f"Connecting to {SERVER}...")
-client.connect(ADDR)
-print(f"Connection to {SERVER} successful.")
 
 def send(msg):
 	msg = "\n" + msg
@@ -43,17 +41,28 @@ def main():
 	username = input("Input your username here: ")
 	print(f"Welcome to the chatroom, {username}!")	
 	msg = None	
+	#create thread for reading messages so everything can be done in real time
 	thread = threading.Thread(target = read_messages, args = (username, ))
 	thread.start()
 	
 	first = True
-	#while msg != DISCONNECT_MESSAGE:
+	
+	#user input and sending messages
 	while True:
+		#if else is for display purposes
 		if first == True:
 			msg = input(">")
 			first = False
 		else:
 			msg = input("")
 		send(username+ ': ' + msg)
+
+
+#join server
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+print(f"Connecting to {SERVER}...")
+client.connect(ADDR)
+print(f"Connection to {SERVER} successful.")
+
 main()
 
