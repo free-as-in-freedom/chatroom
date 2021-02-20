@@ -4,7 +4,9 @@ This is a chatroom project that lets clients connect to a server and communicate
 
 # How to run
 
-To start the client server, make sure to create a ip_info.py file in the directory with the line  `SERVER = "IP ADDRESS OR URL HERE"` inside fo it. To run the server, run `python3 server.py` on the server side, and run `python3 client.py` on the client side.
+To start the client server, make sure to create a `ip_info.py` file in the same directory as server.py with the line `SERVER = "IP ADDRESS OR URL HERE"` inside fo it. 
+
+To run the server, run `python3 server.py` on the server side, and run `python3 client.py` on the client side.
 
 
 [Software Demo Video](https://youtu.be/vdlf2p6fi1g)
