@@ -81,7 +81,6 @@ try:
 except socket_error as serr:
 	if serr.errno != errno.ECONNREFUSED:
 		raise serr
-	
 	print("Could not connect to server.")
 
 

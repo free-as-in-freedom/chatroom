@@ -1,5 +1,7 @@
 import socket
 import threading
+import errno
+from socket import error as socket_error
 from ip_info import SERVER
 
 #Global variables
@@ -10,10 +12,6 @@ ADDR = (SERVER, PORT)
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!D"
 
-#Set up server at IP address
-server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-server.bind(ADDR)
 
 #What to do when a new client connects
 def handle_client(conn, addr, my_clients):
@@ -56,7 +54,13 @@ def start():
         thread = threading.Thread(target=handle_client, args=(conn, addr, my_clients))
         thread.start()
 
+try:
+    print("[STARTING] Server is starting...")
+    #Set up server at IP address
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    server.bind(ADDR)
+    start()
 
-print("[STARTING] Server is starting...")
-start()
-
+except socket_error as serr:
+    raise serr
