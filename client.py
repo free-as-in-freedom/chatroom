@@ -2,6 +2,8 @@ import socket
 import threading
 import os
 import time
+import errno
+from socket import error as socket_error
 from ip_info import SERVER
 
 #global variables
@@ -68,11 +70,19 @@ def main():
 		send(username+ ': ' + msg)
 
 
-#join server
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-print(f"Connecting to {SERVER}...")
-client.connect(ADDR)
-print(f"Connection to {SERVER} successful.")
+try:
+	#join server
+	client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	print(f"Connecting to {SERVER}...")
+	client.connect(ADDR)
+	print(f"Connection to {SERVER} successful.")
+	main()
 
-main()
+except socket_error as serr:
+	if serr.errno != errno.ECONNREFUSED:
+		raise serr
+	
+	print("Could not connect to server.")
+
+
 
