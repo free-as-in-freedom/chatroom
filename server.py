@@ -6,7 +6,7 @@ from ip_info import SERVER
 
 #Global variables
 HEADER = 64
-PORT = 5050
+PORT = 5000
 #get your local ipv4 address
 ADDR = (SERVER, PORT)
 FORMAT = 'utf-8'
@@ -53,6 +53,7 @@ def start():
         #start a thread of handleclient() with each new user
         thread = threading.Thread(target=handle_client, args=(conn, addr, my_clients))
         thread.start()
+
 
 try:
     print("[STARTING] Server is starting...")
