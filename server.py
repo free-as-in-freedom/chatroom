@@ -1,6 +1,7 @@
 import socket
 import threading
 import errno
+import selectors``
 from socket import error as socket_error
 from ip_info import SERVER
 
@@ -61,6 +62,7 @@ try:
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     server.bind(ADDR)
+    server.setblocking(False)
     start()
 
 except socket_error as serr:
